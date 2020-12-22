@@ -1,25 +1,32 @@
-import logo from './logo.svg';
+import React, {Component} from 'react';
+import P5Wrapper from 'react-p5-wrapper';
+import sketch from './sketches/sketch';
+import NavBar from './components/Navbar';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+
+  constructor(){
+    super();
+    this.state = {color:[Math.random()*255, Math.random()*255, Math.random()*255]};
+    this.randomColor = this.randomColor.bind(this);
+  }
+
+  randomColor(){
+    this.setState({color:[Math.random()*255, Math.random()*255, Math.random()*255]})
+  }
+
+  render() {
+    return (
+      
+      <div>
+        <NavBar/>
+        <button onClick={this.randomColor}>Random Color</button>
+        <P5Wrapper sketch={sketch} color={this.state.color}></P5Wrapper>
+      </div>
+    );
+  }
+  
 }
 
 export default App;
